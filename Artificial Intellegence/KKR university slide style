@@ -1,0 +1,302 @@
+
+
+# **1. KNOWLEDGE-BASED AGENTS**
+
+A knowledge-based agent (KBA) is an intelligent system that uses explicit knowledge and logical reasoning to decide what actions to take. As your slides state, *“In AI, knowledge based agents use a process of reasoning over an internal representation of knowledge to decide what actions to take.”* This means a KBA does not rely on simple reflexes but continuously updates and consults a **Knowledge Base (KB)** to understand the world.
+
+### **Core Components (slide wording preserved)**
+
+* **Knowledge Base (KB):** Contains *facts, rules, heuristics,* and domain-specific information.
+* **Inference System:** Performs reasoning and deduction using logic.
+* **TELL:** Adds new percept information to the KB.
+* **ASK:** Queries the KB to determine appropriate action.
+* **Action Executor:** Executes the chosen action in the environment.
+
+A KBA processes percepts using a structured loop. First, it uses **TELL** to store the percept as a sentence in the KB. Then it uses **ASK** to determine the correct action by reasoning over existing facts and rules. Finally, it uses **TELL** again to confirm that the chosen action has been executed. This continuous perception–reasoning–action cycle makes KBAs powerful for complex decision-making tasks.
+
+### **Why KBAs Matter**
+
+* They support logical, explainable decision-making.
+* They can handle incomplete, ambiguous, or uncertain information.
+* They grow more intelligent over time as the KB expands.
+* They mimic human reasoning in structured domains.
+
+### **Advanced Examples**
+
+**Medical Diagnostic Agent:**
+
+* KB contains rules like: Fever(x) ∧ Cough(x) → Flu(x).
+* Percepts include: Fever(Ali), Cough(Ali).
+* ASK → returns Flu(Ali).
+* TELL → records that “Agent diagnosed Ali with Flu.”
+
+**Autonomous Car:**
+
+* KB stores road rules: SpeedLimit(50), SchoolZone(30).
+* Percept: ChildCrossingDetected.
+* ASK → “Slow down immediately.”
+* TELL → updates KB: Action(SlowDown).
+
+---
+
+# **2. PROPOSITIONAL LOGIC (PL)**
+
+Propositional Logic is the simplest form of logic used in AI. Your slides describe it as a *“foundational component of Artificial Intelligence”* where statements are expressed as propositions that are either **true or false**. PL breaks down complex information into simple binary components, enabling structured reasoning.
+
+### **Basic Facts (exact slide wording)**
+
+* Boolean logic uses values **0** and **1**.
+* Symbolic variables include **A, B, C, P, Q, R**.
+* Propositions must be **true or false**—never both.
+* Connectives include **AND, OR, NOT, IMPLIES**.
+* Tautology: always true.
+* Contradiction: always false.
+* Questions, commands, or opinions are **not propositions**.
+
+### **Atomic vs Compound Propositions**
+
+* **Atomic propositions** contain a single statement, e.g., *“2+2 is 4.”*
+* **Compound propositions** combine atomic propositions using logical connectives, e.g., *“It is raining and streets are wet.”*
+
+### **Logical Connectives (slide wording preserved)**
+
+* **Negation (¬P):** The negation of P.
+* **Conjunction (P ∧ Q):** “P and Q.”
+* **Disjunction (P ∨ Q):** “P or Q.”
+* **Implication (P → Q):** “If P then Q.”
+* **Biconditional (P ⇔ Q):** Two statements imply each other.
+
+### **Properties of Logical Connectives**
+
+* Commutative: P ∧ Q = Q ∧ P
+* Associative: (P ∧ Q) ∧ R = P ∧ (Q ∧ R)
+* Distributive: P ∧ (Q ∨ R) = (P ∧ Q) ∧ (P ∧ R)
+* De Morgan’s laws: ¬(P ∧ Q) = ¬P ∨ ¬Q
+* Double negation: ¬(¬P) = P
+
+### **Advanced Example**
+
+Let:
+
+* P = “CPU is overheating.”
+* Q = “Fan is active.”
+* R = “Temperature is safe.”
+
+A system may store rules:
+
+* P → Q
+* Q → R
+* ¬R → Alarm
+
+This creates a simple yet realistic logical model of hardware safety.
+
+### **Limitations (slide wording)**
+
+Propositional Logic cannot represent quantifiers like “all” or “some,” cannot express relationships between objects, and lacks expressive power for complex domains.
+
+---
+
+# **3. PROPOSITIONAL THEOREM PROVING**
+
+Theorem proving determines whether a proposition logically follows from a knowledge base. Formally, we check if **KB ⊨ α**.
+
+Two families of methods are used: **model checking** and **inference-based proofs**.
+
+### **Model Checking**
+
+This method enumerates all possible truth assignments to propositions. It is complete but slow because truth combinations grow exponentially.
+
+### **Inference Rules**
+
+These rules allow deriving conclusions without brute force. The main rules include:
+
+* **Modus Ponens:** From P → Q and P, infer Q.
+* **And-Elimination:** From P ∧ Q, infer P.
+* **Resolution:** Most important for CNF.
+
+### **Resolution Rule (Key Technique)**
+
+Resolution works on **CNF** and uses a single rule:
+
+From:
+
+* (P ∨ A)
+* (¬P ∨ B)
+
+Infer:
+
+* (A ∨ B)
+
+Resolution is sound, complete, and the basis for many automated theorem provers.
+
+---
+
+# **4. CNF & DNF**
+
+Propositional formulas are often converted into standard forms: **Conjunctive Normal Form (CNF)** and **Disjunctive Normal Form (DNF)**.
+
+### **CNF (Conjunctive Normal Form)**
+
+A sentence in CNF is an AND of OR-clauses, such as:
+(P ∨ Q) ∧ (¬R ∨ S)
+
+**Conversion steps:**
+
+* Remove biconditionals and implications
+* Push negations inward
+* Apply distributive laws
+* Simplify
+
+### **DNF (Disjunctive Normal Form)**
+
+A sentence in DNF is an OR of AND-clauses, such as:
+(P ∧ Q) ∨ (¬R ∧ S)
+
+### **Advanced Example**
+
+For (P → Q) ∧ (¬Q → R), CNF conversion requires rewriting implications, pushing negations, and distributing OR across AND to produce a resolution-ready format.
+
+---
+
+# **5. HORN CLAUSES**
+
+Horn clauses are crucial in logic programming and rule-based reasoning. A Horn clause contains **at most one positive literal**.
+
+### **Types (from slides)**
+
+* **Definite clause:** A ∧ B ∧ C → D
+* **Fact:** D
+* **Goal clause:** ¬A ∨ ¬B ∨ ¬C
+
+### **Why They Matter**
+
+* Basis for **forward chaining**
+* Basis for **backward chaining**
+* Efficient for automated reasoning
+* Used in **Prolog** and expert systems
+
+### **Advanced Example**
+
+Rules like:
+
+* HasEngine(x) ∧ HasFuel(x) → CanStart(x)
+* Car(Toyota)
+* HasFuel(Toyota)
+
+Can derive CanStart(Toyota) using Horn logic.
+
+---
+
+# **6. FORWARD & BACKWARD CHAINING**
+
+Forward and backward chaining are reasoning strategies that operate over Horn clauses.
+
+## **Forward Chaining**
+
+Slides define it as: *“In forward chaining, the inference system starts with known facts and applies inference rules to deduce new conclusions.”*
+It is **data-driven** and moves from facts → goal.
+
+### **Process Summary**
+
+* Start with known facts
+* Look for applicable rules
+* Add conclusions to KB
+* Repeat until no new facts emerge
+
+### **Use Case Example**
+
+Monitoring systems, spam detection, and sensor-driven agents use forward chaining to detect real-time conditions.
+
+---
+
+## **Backward Chaining**
+
+Slides describe it as: *“Backward chaining starts with a goal or desired outcome and works backward to determine the conditions under which the goal can be achieved.”*
+It is **goal-driven**, starting from goal → facts.
+
+### **Process Summary**
+
+* Start with the query (goal)
+* Find rules whose conclusion matches the goal
+* Recursively prove premises
+* Continue until all premises are satisfied
+
+### **Advanced Example**
+
+To prove Healthy(Ali):
+
+* Rule: EatsVegetables(x) ∧ Exercises(x) → Healthy(x)
+* Query: Healthy(Ali)
+* Ask: Does Ali eat vegetables? Does Ali exercise?
+
+---
+
+# **7. KNOWLEDGE ENGINEERING IN FIRST-ORDER LOGIC (FOL)**
+
+First-Order Logic (FOL) extends PL by adding **objects, relations, functions, and quantifiers**. Slides say it is expressive enough to represent natural language concisely.
+
+### **Syntax (slide wording preserved)**
+
+* **Objects:** People, numbers, colors
+* **Relations:** Unary, binary, n-ary
+* **Functions:** “Father of,” “Best friend of”
+* **Quantifiers:** ∀ (Universal), ∃ (Existential)
+
+### **Atomic Sentences**
+
+Form: Predicate(term1, term2).
+Examples from slides:
+
+* Brothers(Ali, Umer)
+* Cat(Leo)
+
+### **Complex Sentences**
+
+Use connectives to form larger expressions such as: ¬P, P ∧ Q, P → Q.
+
+### **Inference in FOL (slide rules)**
+
+* **Modus Ponens**
+* **Universal Elimination**
+* **Existential Introduction**
+* **Universal Generalization**
+* **Existential Instantiation**
+
+### **Unification**
+
+Slides define it as a process to make two expressions identical by finding substitutions.
+Example: UNIFY(King(x), King(John)) → {x/John}
+
+### **Advanced Example**
+
+Robot domain:
+
+* ∀x Robot(x) → Intelligent(x)
+* Robot(R2D2)
+* Using universal elimination → Intelligent(R2D2)
+
+---
+
+# **8. EXPERT SYSTEMS**
+
+Expert systems emulate human expert decision-making. They rely heavily on KBAs and logical inference techniques.
+
+### **Components (aligned with KB slides)**
+
+* **Knowledge Base:** Rules + facts
+* **Inference Engine:** Forward/backward chaining
+* **User Interface**
+* **Explanation subsystem**
+
+### **Applications**
+
+Medical diagnosis, fraud detection, hardware diagnostics, legal reasoning.
+
+### **Advanced Example**
+
+An expert system diagnosing engine failures may use rules like:
+
+* EngineCranks(x) ∧ HasFuel(x) → IgnitionProblem(x)
+
+By chaining sensor data, it identifies likely causes efficiently.
+
